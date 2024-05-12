@@ -1,18 +1,13 @@
 local ScreenGui = game.Players.LocalPlayer.PlayerGui:FindFirstChild("MyScreenGui")
 
-
 if not ScreenGui then
     ScreenGui = Instance.new("ScreenGui")
     ScreenGui.Name = "MyScreenGui"
     ScreenGui.Parent = game.Players.LocalPlayer.PlayerGui
 end
 
-
-
 local TextLabel = Instance.new("TextLabel")
 local TextLabel_2 = Instance.new("TextLabel")
-
-
 
 TextLabel.Parent = ScreenGui
 TextLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
@@ -38,11 +33,7 @@ TextLabel_2.Text = ""
 TextLabel_2.TextColor3 = Color3.fromRGB(255, 255, 255)
 TextLabel_2.TextSize = 17.000
 
-
-
-local function IUGEN_fake_script() -- TextLabel_2.LocalScript 
-    local script = Instance.new('LocalScript', TextLabel_2)
-
+local function createFPSCounter()
     local RS = game:GetService("RunService")
     local frames = 0
     
@@ -51,8 +42,16 @@ local function IUGEN_fake_script() -- TextLabel_2.LocalScript
     end)
     
     while wait(1) do
-        script.Parent.Text = frames
+        TextLabel_2.Text = frames
         frames = 0
     end
 end
-coroutine.wrap(IUGEN_fake_script)()
+
+local function createFPSCounterWithProtection()
+    local success, error = pcall(createFPSCounter)
+    if not success then
+        warn("An error occurred while running the FPS counter script:", error)
+    end
+end
+
+createFPSCounterWithProtection()
