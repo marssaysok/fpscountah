@@ -50,7 +50,7 @@ end
 local function createFPSCounterWithProtection()
     local success, error = pcall(createFPSCounter)
     if not success then
-        warn("An error occurred while running the FPS counter script:", error)
+        warn("Wee Woo, Error Occured :OOOOOO", error)
     end
 end
 
